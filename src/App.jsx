@@ -48,6 +48,13 @@ const specs = [
 
 ];
 
+// Visual placeholders for the hero brief; replace with verified project metrics if available.
+const heroMetrics = [
+  { value: "98%", label: "DESIGN PRECISION" },
+  { value: "100%", label: "PURE PERFORMANCE" },
+  { value: "95%", label: "AERODYNAMIC FOCUS" },
+];
+
 export default function App() {
 
   const heroRef = useRef(null);
@@ -137,7 +144,7 @@ export default function App() {
 
       });
 
-      gsap.from(".spec-item", {
+      gsap.from("#performance .spec-item", {
 
         y: 22,
 
@@ -368,11 +375,11 @@ export default function App() {
 
         ref={heroRef}
 
-        className="relative min-h-[360svh] md:min-h-[460vh]"
+        className="relative min-h-[300svh] md:min-h-[360vh]"
 
       >
 
-        <div className="sticky top-0 flex h-[100svh] min-h-[560px] flex-col overflow-hidden px-4 py-4 sm:px-7 sm:py-5 md:px-10 md:py-6 lg:px-[5.7%]">
+        <div className="sticky top-0 flex h-[100svh] min-h-[560px] flex-col overflow-hidden px-4 py-3 sm:px-7 sm:py-4 md:px-10 md:py-5 lg:px-[5.7%]">
 
           <div className="pointer-events-none absolute inset-0">
 
@@ -384,7 +391,7 @@ export default function App() {
 
           {/* NAVIGATION */}
 
-          <nav className="relative z-20 flex shrink-0 items-center justify-between border-b border-white/15 pb-4">
+          <nav className="relative z-20 flex shrink-0 items-center justify-between border-b border-white/15 pb-3 sm:pb-4">
 
             <a
 
@@ -434,86 +441,53 @@ export default function App() {
 
           </nav>
 
-          {/* HERO CONTENT */}
-
-          <div className="relative z-10 grid min-h-0 flex-1 grid-cols-1 items-center gap-1 md:grid-cols-[0.77fr_1.23fr] md:gap-4">
-
-            <div className="hero-copy relative z-20 order-1 pt-7 md:pt-0">
-
-              <p className="mb-4 text-[9px] tracking-[0.36em] text-[#dfff00] sm:text-[10px]">
-
+          {/* HERO CONTENT — headline and metrics stay above the fold */}
+          <div className="relative z-10 grid min-h-0 flex-1 grid-cols-1 items-center gap-0 md:grid-cols-[0.82fr_1.18fr] md:gap-4">
+            <div className="hero-copy relative z-20 order-1 pt-3 md:pt-0">
+              <p className="mb-2 text-[8px] tracking-[0.32em] text-[#dfff00] sm:mb-3 sm:text-[10px]">
                 THE ART OF PERFORMANCE
-
               </p>
-
-              <h1 className="text-[clamp(2.5rem,5.2vw,5rem)] font-semibold leading-[0.99] tracking-[-0.045em]">
-
-                The New
-
+              <h1 className="text-[clamp(2rem,5.1vw,4.8rem)] font-semibold leading-[0.98] tracking-[0.12em] sm:tracking-[0.16em]">
+                WELCOME
                 <br />
-
-                <span className="text-white/65">911 GT3 RS</span>
-
+                <span className="text-white/65">ITZ FIZZ</span>
               </h1>
-
-              <p className="mt-5 max-w-sm text-xs leading-6 text-white/55 sm:text-sm sm:leading-7">
-
-                Precision in every curve. Power in every detail.
-
-                A bold new perspective on automotive design.
-
+              <p className="mt-3 max-w-sm text-[10px] leading-5 text-white/55 sm:mt-4 sm:text-sm sm:leading-6">
+                Precision in every curve. Power in every detail. A bold new perspective on automotive design.
               </p>
-
               <a
-
                 href="#performance"
-
-                className="mt-6 inline-flex items-center gap-4 bg-white px-5 py-3.5 text-[9px] font-bold tracking-[0.2em] text-black transition hover:bg-[#dfff00] sm:mt-7"
-
+                className="mt-4 inline-flex items-center gap-3 bg-white px-4 py-3 text-[8px] font-bold tracking-[0.2em] text-black transition hover:bg-[#dfff00] sm:mt-5 sm:px-5 sm:text-[9px]"
               >
-
                 DISCOVER MORE <ArrowUpRight size={14} />
-
               </a>
-
-              <div className="mt-8 hidden items-center gap-3 text-[8px] tracking-[0.18em] text-white/40 sm:flex">
-
-                <span className="h-px w-8 bg-[#dfff00]" />
-
-                ENGINEERED TO INSPIRE
-
+              <div className="mt-5 grid max-w-md grid-cols-3 border-t border-white/15 pt-3 sm:mt-7 sm:pt-4 md:mt-8">
+                {heroMetrics.map((metric) => (
+                  <div key={metric.label} className="hero-metric border-r border-white/10 px-2 first:pl-0 last:border-0 sm:px-3">
+                    <p className="text-xl font-semibold tracking-tight text-[#dfff00] sm:text-2xl lg:text-3xl">{metric.value}</p>
+                    <p className="mt-1 text-[6px] leading-3 tracking-[0.1em] text-white/50 sm:text-[8px] sm:tracking-[0.14em]">{metric.label}</p>
+                  </div>
+                ))}
               </div>
-
+              <p className="mt-2 text-[7px] text-white/30 sm:text-[8px]">
+                Illustrative design metrics — replace with verified figures before publication.
+              </p>
             </div>
 
-{/* CINEMATIC HERO CAR */}
-
+            {/* CINEMATIC HERO CAR — the image sequence remains scroll-driven */}
             <div className="hero-car relative order-2 flex min-h-0 w-full items-center justify-center md:order-2">
-
-              <div className="hero-cinematic-stage relative h-[clamp(240px,42vh,390px)] w-full overflow-hidden sm:h-[45vh] md:h-[58vh] md:min-h-[340px]">
-
+              <div className="hero-cinematic-stage relative h-[clamp(190px,31svh,300px)] w-full overflow-hidden sm:h-[34svh] md:h-[54vh] md:min-h-[320px]">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.07),transparent_65%)]" />
-
                 <img ref={carRef} src="/car.png" alt="Silver sports car" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-
                 <img src="/front-detail.png" alt="Sports car front detail" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-
                 <img src="/gallery-front.png" alt="Sports car front view" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-
                 <img src="/rear-detail.png" alt="Sports car rear detail" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-
                 <img src="/rear-view.png" alt="Sports car rear view" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-
-                <div className="absolute bottom-3 left-3 z-10">
-
-                  <p className="cinematic-caption text-[9px] tracking-[0.25em] text-[#dfff00]">01 / THE REVEAL</p>
-
+                <div className="absolute bottom-2 left-2 z-10 sm:bottom-3 sm:left-3">
+                  <p className="cinematic-caption text-[8px] tracking-[0.22em] text-[#dfff00] sm:text-[9px] sm:tracking-[0.25em]">01 / THE REVEAL</p>
                 </div>
-
               </div>
-
             </div>
-
           </div>
 
             {/* HERO FOOTER */}
