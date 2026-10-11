@@ -266,10 +266,17 @@ export default function App() {
         .to(car, {
           x: () => {
             const isMobile = window.matchMedia("(max-width: 639px)").matches;
+            const sectionWidth = section.clientWidth;
             const carWidth = car.getBoundingClientRect().width;
+            const rightPadding = isMobile ? 12 : sectionWidth * 0.04;
+
+            // Keep the entire car inside the section on mobile and desktop.
+            const targetX = sectionWidth - carWidth - rightPadding;
+
+            // Preserve the existing desktop positioning.
             return isMobile
-              ? Math.max(12, section.clientWidth * 0.38)
-              : Math.max(12, section.clientWidth - carWidth - section.clientWidth * 0.04);
+              ? Math.max(0, targetX)
+              : Math.max(12, targetX);
           },
           autoAlpha: 1,
           duration: 2.15,
