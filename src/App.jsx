@@ -265,7 +265,13 @@ export default function App() {
         defaults: { ease: "power3.out" },
       })
         .to(car, {
-          x: () => Math.max(12, section.clientWidth - car.getBoundingClientRect().width - section.clientWidth * 0.04),
+          x: () => {
+            const isMobile = window.matchMedia("(max-width: 639px)").matches;
+            const carWidth = car.getBoundingClientRect().width;
+            return isMobile
+              ? Math.max(12, section.clientWidth * 0.38)
+              : Math.max(12, section.clientWidth - carWidth - section.clientWidth * 0.04);
+          },
           autoAlpha: 1,
           duration: 2.15,
         })
@@ -478,11 +484,11 @@ export default function App() {
             <div className="hero-car relative order-2 flex min-h-0 w-full items-center justify-center md:order-2">
               <div className="hero-cinematic-stage relative h-[clamp(190px,31svh,300px)] w-full overflow-hidden sm:h-[34svh] md:h-[54vh] md:min-h-[320px]">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.07),transparent_65%)]" />
-                <img ref={carRef} src="/car.png" alt="Silver sports car" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-                <img src="/front-detail.png" alt="Sports car front detail" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-                <img src="/gallery-front.png" alt="Sports car front view" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-                <img src="/rear-detail.png" alt="Sports car rear detail" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
-                <img src="/rear-view.png" alt="Sports car rear view" className="cinematic-image absolute inset-0 h-full w-full object-contain" />
+                <img ref={carRef} src="/car.png" alt="Silver sports car" className="cinematic-image absolute inset-0 h-full w-full object-contain" fetchPriority="high" decoding="async" />
+                <img src="/front-detail.png" alt="Sports car front detail" className="cinematic-image absolute inset-0 h-full w-full object-contain" decoding="async" />
+                <img src="/gallery-front.png" alt="Sports car front view" className="cinematic-image absolute inset-0 h-full w-full object-contain" decoding="async" />
+                <img src="/rear-detail.png" alt="Sports car rear detail" className="cinematic-image absolute inset-0 h-full w-full object-contain" decoding="async" />
+                <img src="/rear-view.png" alt="Sports car rear view" className="cinematic-image absolute inset-0 h-full w-full object-contain" decoding="async" />
                 <div className="absolute bottom-2 left-2 z-10 sm:bottom-3 sm:left-3">
                   <p className="cinematic-caption text-[8px] tracking-[0.22em] text-[#dfff00] sm:text-[9px] sm:tracking-[0.25em]">01 / THE REVEAL</p>
                 </div>
@@ -601,6 +607,7 @@ export default function App() {
               className="reveal relative h-full max-h-[330px] w-full object-contain p-3"
 
               loading="lazy"
+              decoding="async"
 
             />
 
@@ -1085,10 +1092,10 @@ export default function App() {
       {/* FINAL MOTION — car glides in and stops in-frame; copy follows */}
       <section
         ref={finalMotionRef}
-        className="final-motion relative isolate min-h-[190px] overflow-hidden bg-[#090a0b] sm:min-h-[250px] lg:min-h-[290px]"
+        className="final-motion relative isolate min-h-[360px] overflow-hidden bg-[#090a0b] sm:min-h-[250px] lg:min-h-[290px]"
         aria-label="FIZZ final motion"
       >
-        <div className="final-motion-copy pointer-events-none absolute left-5 top-5 z-10 max-w-[45%] opacity-0 sm:left-10 sm:top-8 lg:left-[7%]">
+        <div className="final-motion-copy pointer-events-none absolute left-4 right-4 top-5 z-30 w-auto max-w-none opacity-0 sm:left-10 sm:right-auto sm:top-8 sm:max-w-[45%] lg:left-[7%]">
           <p className="mb-2 text-[8px] tracking-[0.32em] text-[#dfff00] sm:text-[9px]">FIZZ / BUILT TO MOVE</p>
           <p className="text-xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-3xl lg:text-4xl">
             Motion that
@@ -1100,8 +1107,9 @@ export default function App() {
         <img
           src="/car.png"
           alt="Silver sports car moving into position"
-          className="final-motion-car absolute bottom-0 left-0 z-20 w-[min(72vw,390px)] translate-x-[-110%] object-contain sm:w-[min(55vw,500px)] lg:w-[min(46vw,560px)]"
+          className="final-motion-car absolute bottom-0 left-0 z-20 w-[min(68vw,270px)] translate-x-[-110%] object-contain sm:w-[min(55vw,500px)] lg:w-[min(46vw,560px)]"
           loading="lazy"
+          decoding="async"
         />
       </section>
 
