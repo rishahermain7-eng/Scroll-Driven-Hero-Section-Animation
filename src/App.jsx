@@ -967,7 +967,7 @@ export default function App() {
 
           <img
 
-            src="/car.png"
+            src="/rear-view.png"
 
             alt="Silver sports car"
 
