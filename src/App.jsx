@@ -34,7 +34,6 @@ const gallery = [
 
   { image: "/rear-view.png", label: "REAR VIEW", number: "05" },
 
-  { image: "/gallery-rear.png", label: "REAR PROFILE", number: "06" },
 
 ];
 
